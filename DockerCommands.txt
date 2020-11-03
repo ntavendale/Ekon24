@@ -1,0 +1,27 @@
+Docker coomands (run from PowerShell):
+======================================
+1) Create and image from the default docker file:
+docker build -t <image_name> .
+
+e.g. To build an image delphi_test:latest :
+docker build -t delphi_test .
+
+2) List all images
+docker image ls -a
+
+3) Remove all images with a given name:
+docker rmi -f $(docker images <image_name> -q)
+
+e.g. To get rid of all delphi_test images regardess of tag:
+docker rmi -f $(docker images delphi_test -q)
+
+4) List all containers, running or not
+docker ps -a
+
+5) Run container as daemon (-d), remapping port (-p), specify name (--name) 
+docker run -d  -p 6200:5200 --name webapp delphi_test
+
+6) Connect to the running container and run powershell interactively
+docker exec -it webapp powershell.exe
+
+(Use Get-Process to see processes running)
